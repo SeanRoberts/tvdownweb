@@ -1,0 +1,41 @@
+%ul.nav.nav-tabs
+  %li
+    %a{href: '#downloads', data: {toggle: 'tab'}} Downloads
+  %li
+    %a{href: '#files', data: {toggle: 'tab'}} All Files
+
+.tab-content
+  .tab-pane.active#downloads
+    %table.table.table-striped
+      %thead
+        %tr
+          %th File
+          %th Progress
+          %th Speed
+          %th Time Left
+
+      %tbody
+
+
+  .tab-pane#files
+    %table.table.table-striped
+      %thead
+        %tr
+          %th File
+          %th Downloaded
+          %th Size
+          %th{:colspan => 3} Info
+
+      %tbody
+        - Show.all.each do |show|
+          %tr
+            %td= show.filename
+            %td= show.mtime.strftime('%B %e, %Y at %I:%M%P')
+            %td #{"%.2f" % (show.size.to_f / 1024 / 1024) }MB
+            - if download = ActiveDownload.find(show.path)
+              %td #{"%.2f" % download.speed}KB/s
+              %td #{"%.2f" % download.percent_complete}% complete
+              %td #{download.time_left} remaining
+            - else
+              %td{:colspan => 3}
+                %a{:href => "/download#{File.join(show.dir, show.filename)}"} Download

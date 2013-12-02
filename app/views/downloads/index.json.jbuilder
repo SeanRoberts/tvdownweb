@@ -1,0 +1,1 @@
+json.array!(@downloads, :path, :complete, :filesize, :speed, :time_left, :speed, :percent_complete, :filename)

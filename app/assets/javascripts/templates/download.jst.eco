@@ -1,0 +1,12 @@
+<tr>
+  <td style="width: 390px;"><%= @download.filename %></td>
+  <td>
+    <div class="progress">
+      <div class="progress-bar" style="width: <%= @download.percent_complete %>%;">
+        <span class="sr-only"><%= parseFloat(@download.percent_complete).toFixed(2) %>% Complete</span>
+      </div>
+    </div>
+  </td>
+  <td><%= parseFloat(@download.speed).toFixed(2) %>KB/s</td>
+  <td><%= @download.time_left %></td>
+</tr>
